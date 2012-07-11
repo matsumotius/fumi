@@ -1,0 +1,2 @@
+# fumi
+FM-index
