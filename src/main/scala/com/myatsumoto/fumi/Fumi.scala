@@ -5,6 +5,7 @@ class Fumi(input:String) {
   private val bwt   = new Bwt(input)
   private val first = new Wabi(bwt.first)
   private val last  = new Wabi(bwt.last)
+  private val keys  = last.keys.keySet.toList.sortWith(_<_)
 
   private val EMPTY_LIST = List(-1)
   private val NOT_FOUND  = (false, EMPTY_LIST)
@@ -16,10 +17,9 @@ class Fumi(input:String) {
       return EMPTY_LIST
     }
 
-    val keys = last.keys.keySet.toList.sortWith(_<_)
     val next = keys(math.min(keys.indexOf(str)+1, keys.size-1))
- 
     val (found, list) = count(input.dropRight(1), c(str), c(next))
+
     if (found) 
       return list.map(i => bwt.position(i))
     else 
